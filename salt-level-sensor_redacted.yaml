@@ -1,0 +1,73 @@
+esphome:
+  name: salt-level-sensor
+  friendly_name: salt-level-sensor
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API with encryption
+api:
+  encryption:
+    key: ""
+
+# Over-the-air updates with a platform specified
+ota:
+  platform: esphome
+  password: ""
+
+wifi:
+  ssid: 
+  password: 
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Salt-Level-Sensor"
+    password: ""
+
+captive_portal:
+
+# MQTT settings (assuming these are still required)
+mqtt:
+  broker: mqtt
+  
+web_server:
+  port: 80
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+text_sensor:
+  - platform: version
+    name: salt_level_sensor ESPHome Version
+  - platform: wifi_info
+    ip_address:
+      name: salt_level_sensor IP
+    ssid:
+      name: salt_level_sensor SSID
+    bssid:
+      name: salt_level_sensor BSSID
+
+switch:
+  - platform: restart
+    name: "salt_level_sensor Restart"
+
+sensor:
+  - platform: uptime
+    name: salt_level_sensor Uptime
+
+  - platform: wifi_signal
+    name: salt_level_sensor WiFi Signal
+    update_interval: 30s
+
+  - platform: ultrasonic
+    update_interval: 10s
+    trigger_pin: GPIO13
+    echo_pin: GPIO14
+    name: "Saltlevel"
+    unit_of_measurement: "cm"
