@@ -1,3 +1,5 @@
+# Based on: https://adonno.com/salt-level-sensor/
+
 esphome:
   name: salt-level-sensor
   friendly_name: salt-level-sensor
